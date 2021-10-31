@@ -17,8 +17,8 @@ public class LoginWithUsernameThread extends Thread{
     public void run() {
         HttpURLConnection connection;
         try {
-            String name = api.convertMD5(UserInfo.username), psw = api.convertMD5(UserInfo.password);
-            connection = (HttpURLConnection) new URL( api.url + "/api/getUser/"+
+            String name = Api.convertMD5(UserInfo.username), psw = Api.convertMD5(UserInfo.password);
+            connection = (HttpURLConnection) new URL( Api.url + "/api/getUser/"+
                     name +"/"+ psw).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -27,10 +27,10 @@ public class LoginWithUsernameThread extends Thread{
             connection.setConnectTimeout(1000);
             connection.connect();
 
-            JSONObject jsonObject = api.getJson(connection);
+            JSONObject jsonObject = Api.getJson(connection);
             if(!jsonObject.getString("token").equals("")){
                 UserInfo.token = jsonObject.getString("token");
-                api.saveData(api.SAVE_TOKEN);
+                Api.saveData(Api.SAVE_TOKEN);
                 UserInfo.loginSucceed = true;
             }
             connection.disconnect();

@@ -13,7 +13,7 @@ public class LoginWithTokenThread extends Thread{
         HttpURLConnection connection;
         try {
             //connect to remote server via special interface
-            connection = (HttpURLConnection) new URL(api.url + "/api/getUser/"+
+            connection = (HttpURLConnection) new URL(Api.url + "/api/getUser/"+
                     UserInfo.username).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -28,12 +28,12 @@ public class LoginWithTokenThread extends Thread{
 
             //if the token is available, it's expected to get
             //JSONObject with message as 200 inside
-            JSONObject jsonObject = api.getJson(connection);
+            JSONObject jsonObject = Api.getJson(connection);
             if(jsonObject.getString("message").equals("200")){
                 UserInfo.loginSucceed = true;
             }else{
                 //token expired
-                api.saveData(api.CLEAR_TOKEN);
+                Api.saveData(Api.CLEAR_TOKEN);
                 UserInfo.token = "";
             }
             connection.disconnect();
@@ -42,7 +42,7 @@ public class LoginWithTokenThread extends Thread{
             e.printStackTrace();
         }catch (JSONException e){
             //token expired
-            api.saveData(api.CLEAR_TOKEN);
+            Api.saveData(Api.CLEAR_TOKEN);
             UserInfo.loginSucceed = false;
             UserInfo.token = "";
             e.printStackTrace();

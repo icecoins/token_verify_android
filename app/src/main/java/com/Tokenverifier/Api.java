@@ -19,7 +19,7 @@ import java.net.HttpURLConnection;
 import java.util.Date;
 import java.util.Objects;
 
-public class api {
+public class Api {
     //global Toast
     private static Toast t1;
     //global SharedPreferences

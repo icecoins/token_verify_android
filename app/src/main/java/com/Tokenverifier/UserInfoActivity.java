@@ -10,15 +10,15 @@ public class UserInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api.setFullscreen(this);
+        Api.setFullscreen(this);
 
         //set current SharedPreferences
-        api.sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
+        Api.sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
 
         setContentView(R.layout.activity_info);
 
         //update information
-        updateInfoThread updateInfoThread = new updateInfoThread();
+        UpdateInfoThread updateInfoThread = new UpdateInfoThread();
         updateInfoThread.start();
 
         try {

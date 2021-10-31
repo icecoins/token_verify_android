@@ -23,14 +23,14 @@ public class TestServerThread extends Thread{
                 break;
             }
             try {
-                connection = (HttpURLConnection) new URL(api.url + "/api/time").openConnection();
+                connection = (HttpURLConnection) new URL(Api.url + "/api/time").openConnection();
                 connection.setDoInput(true);
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
                 connection.setConnectTimeout(1000);
                 connection.connect();
 
-                JSONObject jsonObject = api.getJson(connection);
+                JSONObject jsonObject = Api.getJson(connection);
                 if(!jsonObject.getString("time").equals("")){
                     UserInfo.isServerAvailable = true;
                     break;

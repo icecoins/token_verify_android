@@ -14,12 +14,12 @@ import java.net.URL;
  * which is very simple and easy to understand.
  * Please understand by yourself.
  * */
-public class updateInfoThread extends Thread{
+public class UpdateInfoThread extends Thread{
     @Override
     public void run() {
         HttpURLConnection connection;
         try {
-            connection = (HttpURLConnection) new URL(api.url + "/api/getInfo/"+
+            connection = (HttpURLConnection) new URL(Api.url + "/api/getInfo/"+
                     UserInfo.username).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -29,7 +29,7 @@ public class updateInfoThread extends Thread{
             connection.setConnectTimeout(2 * 1000);
             connection.connect();
 
-            JSONObject jsonObject = api.getJson(connection);
+            JSONObject jsonObject = Api.getJson(connection);
             if(!jsonObject.getString("id").equals("") &&
                     !jsonObject.getString("username").equals("") &&
                     !jsonObject.getString("info").equals("")){
@@ -49,7 +49,7 @@ public class updateInfoThread extends Thread{
             connection.setConnectTimeout(2 * 1000);
             connection.connect();
 
-            jsonObject = api.getJson(connection);
+            jsonObject = Api.getJson(connection);
             if(!jsonObject.getString("coin").equals("") &&
                     !jsonObject.getString("level").equals("") &&
                     !jsonObject.getString("exp").equals("")){

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //set the app to be fullscreen
-        api.setFullscreen(this);
+        Api.setFullscreen(this);
         setContentView(R.layout.activity_main);
         UserInfo.isServerAvailable = false;
         UserInfo.loginSucceed = false;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         testServerThread.start();
 
         //set current SharedPreferences
-        api.sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
+        Api.sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
 
         findViewById(R.id.login).setOnClickListener(this);
 
@@ -58,15 +58,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else{
                 if(UserInfo.isServerAvailable){
                     //the token is unavailable
-                    api.showMsg(this, "登录期已过，请重新登录");
+                    Api.showMsg(this, "登录期已过，请重新登录");
                 }else {
                     //the server is unavailable
-                    api.showMsg(this, "服务器连接失败，请稍后再试");
+                    Api.showMsg(this, "服务器连接失败，请稍后再试");
                 }
             }
         }else{
             //there's no token
-            api.showMsg(this, "无本地token，请使用用户名密码登录");
+            Api.showMsg(this, "无本地token，请使用用户名密码登录");
         }
 
 
@@ -96,11 +96,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public String getLocalToken(){
-        return api.sharedPreferences.getString("token", null);
+        return Api.sharedPreferences.getString("token", null);
     }
 
     public String getLocalUsername(){
-        return api.sharedPreferences.getString("username", null);
+        return Api.sharedPreferences.getString("username", null);
     }
 
     //clear the space and the line break
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v.getId() == R.id.login){
             if(name.getText().toString().trim().equals("") ||
                     psw.getText().toString().trim().equals("")){
-                api.showMsg(MainActivity.this, "username or password cannot be blank");
+                Api.showMsg(MainActivity.this, "username or password cannot be blank");
             }else{
                 if(loginWithUsernameThread == null){
                     loginWithUsernameThread = new LoginWithUsernameThread();
@@ -142,13 +142,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // and jump to the second activity
                     if(UserInfo.loginSucceed){
                         testServerThread.interrupt();
-                        api.saveData(api.SAVE_USERNAME);
-                        api.saveData(api.SAVE_PASSWORD);
+                        Api.saveData(Api.SAVE_USERNAME);
+                        Api.saveData(Api.SAVE_PASSWORD);
                         //api.saveData(api.SAVE_AVAILABLE_TRUE);
                         Intent it = new Intent(MainActivity.this, UserInfoActivity.class);
                         startActivity(it);
                     }else{
-                        api.showMsg(MainActivity.this, "Login failed");
+                        Api.showMsg(MainActivity.this, "Login failed");
                     }
                 }
             }
