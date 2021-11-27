@@ -1,11 +1,12 @@
 package com.Tokenverifier;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
@@ -17,9 +18,9 @@ import java.net.URL;
 public class UpdateInfoThread extends Thread{
     @Override
     public void run() {
-        HttpURLConnection connection;
+        HttpsURLConnection connection;
         try {
-            connection = (HttpURLConnection) new URL(Api.url + "/api/getInfo/"+
+            connection = (HttpsURLConnection) new URL(Api.url + "/api/getInfo/"+
                     UserInfo.username).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -38,8 +39,23 @@ public class UpdateInfoThread extends Thread{
             }
             connection.disconnect();
 
+            connection = (HttpsURLConnection) new URL(Api.url + "/api/checkIn/"+
+                    UserInfo.username).openConnection();
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            connection.setRequestProperty("Via", UserInfo.token);
+            connection.setConnectTimeout(2 * 1000);
+            connection.connect();
+            jsonObject = Api.getJson(connection);
+            Log.e("check", jsonObject.toString());
+            connection.disconnect();
 
-            connection = (HttpURLConnection) new URL("http://192.168.137.1:8848/api/getProperty/"+
+
+
+
+            connection = (HttpsURLConnection) new URL(Api.url + "/api/getProperty/"+
                     UserInfo.username).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);

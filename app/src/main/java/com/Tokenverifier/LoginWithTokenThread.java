@@ -2,18 +2,17 @@ package com.Tokenverifier;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
 
 public class LoginWithTokenThread extends Thread{
     @Override
     public void run() {
-        HttpURLConnection connection;
+        HttpsURLConnection connection;
         try {
             //connect to remote server via special interface
-            connection = (HttpURLConnection) new URL(Api.url + "/api/getUser/"+
+            connection = (HttpsURLConnection) new URL(Api.url + "/api/getUser/"+
                     UserInfo.username).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);

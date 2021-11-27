@@ -15,7 +15,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="320dp"
         android:hint="username"
-        android:text="user2"
+        android:text="user1"
         android:textColor="@color/red" />
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="430dp"
         android:hint="password"
-        android:text="psw2"
+        android:text="psw1"
         android:textColor="@color/yellow" />
 
     <Button

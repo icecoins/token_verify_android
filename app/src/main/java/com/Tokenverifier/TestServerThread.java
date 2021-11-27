@@ -2,10 +2,9 @@ package com.Tokenverifier;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
@@ -17,13 +16,13 @@ import java.net.URL;
 public class TestServerThread extends Thread{
     @Override
     public void run(){
-        HttpURLConnection connection;
+        HttpsURLConnection connection;
         while(!UserInfo.isServerAvailable){
             if(Thread.currentThread().isInterrupted()){
                 break;
             }
             try {
-                connection = (HttpURLConnection) new URL(Api.url + "/api/time").openConnection();
+                connection = (HttpsURLConnection) new URL(Api.url + "/api/time").openConnection();
                 connection.setDoInput(true);
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");

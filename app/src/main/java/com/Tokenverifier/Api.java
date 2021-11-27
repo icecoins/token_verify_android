@@ -26,7 +26,7 @@ public class Api {
     public static SharedPreferences sharedPreferences;
     //global url, u'd better change it,
     // like "http://example.com:5678" and so on
-    public static String url = "http://1.2.3.4:5678";
+    public static String url = "https://example.com";
     //it's easy to understand
     public static final int
                     SAVE_USERNAME = 1, SAVE_PASSWORD = 2, SAVE_TOKEN = 3,
@@ -139,7 +139,6 @@ public class Api {
 
         //hide top status bar
         activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
-
     }
 
     /**
