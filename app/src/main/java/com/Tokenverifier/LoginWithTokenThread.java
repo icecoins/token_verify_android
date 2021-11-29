@@ -33,6 +33,7 @@ public class LoginWithTokenThread extends Thread{
             }else{
                 //token expired
                 Api.saveData(Api.CLEAR_TOKEN);
+                UserInfo.loginSucceed = false;
                 UserInfo.token = "";
             }
             connection.disconnect();
