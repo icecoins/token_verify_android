@@ -1,4 +1,4 @@
-# TokenVerifier
+# token_verify_android
 这个app在初次登录成功后将token储存在本地，并在下次打开时尝试使用token登录
 
 与其配套使用的服务端是基于springboot的token验证器：https://github.com/icecoins/springboot-verify-token-raspi
